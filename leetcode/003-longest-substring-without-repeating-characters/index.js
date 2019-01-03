@@ -3,10 +3,11 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-  if(s.length < 2 ) return s.length;
+  let l = s.length;
+  if(l < 2 ) return l;
   let maxLength = 0;
   let maxWord = [];
-  for(let i = 0, l = s.length; i < l; i++) {
+  for(let i = 0; i < l; i++) {
     let index = maxWord.indexOf(s[i]);
     if(index != -1) {
       if(maxWord.length > maxLength) {
