@@ -1,0 +1,25 @@
+{
+  "name": "mess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^2.3.0"
+  },
+  "ava": {
+    "files": [
+      "**/test.js",
+      "!**/not-this-file.js"
+    ],
+    "source": [
+      "**/*.{js,jsx}",
+      "!dist/**/*"
+    ]
+  }
+}

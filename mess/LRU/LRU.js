@@ -6,6 +6,10 @@
  * 如何筛选去除旧的缓存呢 ？依据核心思想，我们找到最久未被访问的，淘汰之。
  */
 
+const hasIndex = (stack, key) => {
+  return stack.findIndex(([cacheKey]) => cacheKey === key);
+}
+
 class LRU {
   constructor(maxSize) {
     this.maxSize = maxSize;
@@ -13,7 +17,7 @@ class LRU {
   }
 
   set(key, val) {
-    const searchIndex = this.has(key);
+    const searchIndex = hasIndex(this.stack, key);
     // 判断是否存在
     if(searchIndex !== -1) {
       // 如果存在，移除原先该项所在位置
@@ -36,13 +40,17 @@ class LRU {
   }
 
   has(key) {
-    return this.stack.findIndex(([cacheKey]) => cacheKey === key);
+    return hasIndex(this.stack, key) !== -1;
   }
 
   get(key) {
     const result = this.stack.find(([cacheKey]) => cacheKey === key);
     if(result) return result[1];
     return undefined;
+  }
+
+  clear() {
+    this.stack = [];
   }
 }
 
