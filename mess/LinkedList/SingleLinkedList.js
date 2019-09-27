@@ -1,4 +1,5 @@
 /**
+ * https://www.geeksforgeeks.org/reverse-a-linked-list/
  * 单链表模型
  */
 
@@ -73,6 +74,20 @@ class LinkedList {
       index--;
     }
     return curr ? curr : false;
+  }
+
+    // 链表反转  迭代法
+  reverseList() {
+    let curr = this.head.next;
+    let prev = null;
+    let next = null;
+    while(curr !== null) {
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    this.head.next = prev;
   }
 
   map(callback) {

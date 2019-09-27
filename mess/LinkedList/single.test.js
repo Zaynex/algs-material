@@ -2,24 +2,9 @@ import test from 'ava';
 import LinkedList from './SingleLinkedList';
 
 const isObject = x => Object.prototype.toString.call(x) === '[object Object]';
-const arraysEqual = (a, b) => {
-  if (a === b) return true;
-  if (a == null || b == null) return false;
-  if (a.length != b.length) return false;
-
-  // If you don't care about the order of the elements inside
-  // the array, you should sort both arrays here.
-  // Please note that calling sort on an array will modify that array.
-  // you might want to clone your array first.
-
-  for (var i = 0; i < a.length; ++i) {
-    if (a[i] !== b[i]) return false;
-  }
-  return true;
-}
 
 test('exports', t => {
-  let keys = ['append', 'findByValue', 'insert', 'findPrev', 'remove', 'findByIndex', 'map'];
+  let keys = ['append', 'findByValue', 'insert', 'findPrev', 'remove', 'findByIndex','reverseList', 'map'];
   t.is(typeof LinkedList, 'function', 'exports a function');
 
   let linkList = new LinkedList();
@@ -70,7 +55,6 @@ test('findIndex', t => {
   t.is(foo.findByIndex(2), false, '~> returns `false` when not find');
 })
 
-
 test('map', t => {
   let foo = new LinkedList();
   let tempArr = [1,34,34,565,45]
@@ -82,5 +66,20 @@ test('map', t => {
     arr.push(val)
   }
   foo.map(callback);
-  t.is(arraysEqual(arr, tempArr), true, '~> returns `true` when two array is equal');
+  t.deepEqual(arr, tempArr, '~> returns `true` when two array is equal');
+})
+
+test('reverseList', t => {
+  let foo = new LinkedList();
+  let tempArr = [1,34,34,565,45]
+  tempArr.forEach(item => {
+    foo.append(item);
+  })
+  foo.reverseList();
+  let arr = []
+  const callback = (val) => {
+    arr.push(val)
+  }
+  foo.map(callback);
+  t.deepEqual(arr, tempArr.reverse(), '~> returns `true` when two array is equal');
 })
