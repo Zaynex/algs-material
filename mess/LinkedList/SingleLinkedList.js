@@ -90,6 +90,19 @@ class LinkedList {
     this.head.next = prev;
   }
 
+  isCycle() {
+    let curr = this.head.next;
+    let base = this.head.next;
+    while(curr !== null && base !== null && base.next !== null) {
+      base = base.next.next;
+      curr = curr.next;
+      if(base === curr) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   map(callback) {
     let curr = this.head.next;
     while (curr !== null) {

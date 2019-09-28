@@ -4,7 +4,7 @@ import LinkedList from './SingleLinkedList';
 const isObject = x => Object.prototype.toString.call(x) === '[object Object]';
 
 test('exports', t => {
-  let keys = ['append', 'findByValue', 'insert', 'findPrev', 'remove', 'findByIndex','reverseList', 'map'];
+  let keys = ['append', 'findByValue', 'insert', 'findPrev', 'remove', 'findByIndex','reverseList', 'isCycle', 'map'];
   t.is(typeof LinkedList, 'function', 'exports a function');
 
   let linkList = new LinkedList();
@@ -82,4 +82,15 @@ test('reverseList', t => {
   }
   foo.map(callback);
   t.deepEqual(arr, tempArr.reverse(), '~> returns `true` when two array is equal');
+})
+
+test('isCycle', t => {
+  let foo = new LinkedList();
+  let tempArr = [1,34,374,565,45, 20]
+  tempArr.forEach(item => {
+    foo.append(item);
+  })
+  t.is(foo.isCycle(), false, '~> returns `false` when linkedlist is not cycle');
+  foo.findByIndex(5).next = foo.findByIndex(1);
+  t.is(foo.isCycle(), true, '~> returns `true` when linkedlist is cycle');
 })
