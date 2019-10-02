@@ -13,6 +13,7 @@ class Node {
 class LinkedList {
   constructor() {
     this.head = new Node("head");
+    this.next = null;
   }
 
   // 向表尾中插入
@@ -76,6 +77,14 @@ class LinkedList {
     return curr ? curr : false;
   }
 
+  findLast() {
+    let curr = this.head.next;
+    while(curr && curr.next) {
+      curr = curr.next;
+    }
+    return curr;
+  }
+
     // 链表反转  迭代法
   reverseList() {
     let curr = this.head.next;
@@ -110,6 +119,28 @@ class LinkedList {
       curr = curr.next;
     }
   }
+
+  static mergeLinkedList(list1, list2) {
+    if(list1 === null || list2 === null) {
+      return list1 || list2;
+    }
+    let curr1 = list1.head.next;
+    let curr2 = list2.head.next;
+    let resultList = new LinkedList();
+    while(curr1 !== null && curr2 !== null) {
+      if(curr1.value <= curr2.value) {
+        resultList.append(curr1.value);
+        curr1 = curr1.next;
+      } else {
+        resultList.append(curr2.value);
+        curr2 = curr2.next;
+      }
+    }
+    const resultListLast = resultList.findLast();
+    resultListLast.next = curr2 ? curr2 : curr1;
+    return resultList;
+  }
 }
+
 
 module.exports = LinkedList;
