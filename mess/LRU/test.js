@@ -18,12 +18,12 @@ test("set()", t => {
   let foo = new LRU(3);
   foo.set("k", 1);
   t.is(foo.stack.length, 1, "~> returns true if stack length add");
-  foo.set('k2', 2);
-  foo.set('k3', 3);
-  foo.set('k4', 4);
-  t.deepEqual(foo.stack, [['k4', 4], ['k3', 3], ['k2', 2]], "~> returns true");
-  foo.set('k2', 2);
-  t.deepEqual(foo.stack, [['k2',2], ['k4', 4], ['k3',3]]);
+  foo.set("k2", 2);
+  foo.set("k3", 3);
+  foo.set("k4", 4);
+  t.deepEqual(foo.stack, [["k4", 4], ["k3", 3], ["k2", 2]], "~> returns true");
+  foo.set("k2", 2);
+  t.deepEqual(foo.stack, [["k2", 2], ["k4", 4], ["k3", 3]]);
 });
 
 test("get()", t => {

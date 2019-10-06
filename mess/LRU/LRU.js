@@ -9,7 +9,7 @@
 
 const hasIndex = (stack, key) => {
   return stack.findIndex(([cacheKey]) => cacheKey === key);
-}
+};
 
 class LRU {
   constructor(maxSize) {
@@ -20,7 +20,7 @@ class LRU {
   set(key, val) {
     const searchIndex = hasIndex(this.stack, key);
     // 判断是否存在
-    if(searchIndex !== -1) {
+    if (searchIndex !== -1) {
       // 如果存在，移除原先该项所在位置
       this.stack.splice(searchIndex, 1);
       // 并将该项插入到栈的顶部
@@ -30,7 +30,7 @@ class LRU {
 
     // 不存在的话
     // 1. 栈未满 2.栈满
-    if(this.stack.length < this.maxSize) {
+    if (this.stack.length < this.maxSize) {
       this.stack.unshift([key, val]);
       return;
     }
@@ -46,7 +46,7 @@ class LRU {
 
   get(key) {
     const result = this.stack.find(([cacheKey]) => cacheKey === key);
-    if(result) return result[1];
+    if (result) return result[1];
     return undefined;
   }
 

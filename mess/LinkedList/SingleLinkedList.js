@@ -79,18 +79,18 @@ class LinkedList {
 
   findLast() {
     let curr = this.head.next;
-    while(curr && curr.next) {
+    while (curr && curr.next) {
       curr = curr.next;
     }
     return curr;
   }
 
-    // 链表反转  迭代法
+  // 链表反转  迭代法
   reverseList() {
     let curr = this.head.next;
     let prev = null;
     let next = null;
-    while(curr !== null) {
+    while (curr !== null) {
       next = curr.next;
       curr.next = prev;
       prev = curr;
@@ -102,10 +102,10 @@ class LinkedList {
   isCycle() {
     let curr = this.head.next;
     let base = this.head.next;
-    while(curr !== null && base !== null && base.next !== null) {
+    while (curr !== null && base !== null && base.next !== null) {
       base = base.next.next;
       curr = curr.next;
-      if(base === curr) {
+      if (base === curr) {
         return true;
       }
     }
@@ -121,14 +121,14 @@ class LinkedList {
   }
 
   static mergeLinkedList(list1, list2) {
-    if(list1 === null || list2 === null) {
+    if (list1 === null || list2 === null) {
       return list1 || list2;
     }
     let curr1 = list1.head.next;
     let curr2 = list2.head.next;
     let resultList = new LinkedList();
-    while(curr1 !== null && curr2 !== null) {
-      if(curr1.value <= curr2.value) {
+    while (curr1 !== null && curr2 !== null) {
+      if (curr1.value <= curr2.value) {
         resultList.append(curr1.value);
         curr1 = curr1.next;
       } else {
@@ -141,6 +141,5 @@ class LinkedList {
     return resultList;
   }
 }
-
 
 module.exports = LinkedList;

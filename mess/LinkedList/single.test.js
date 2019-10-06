@@ -77,13 +77,21 @@ test("findIndex", t => {
 
 test("findLast", t => {
   let foo = new LinkedList();
-  foo.append('111');
-  t.is(foo.findLast().value, '111', '~> return `111` when findLast value is 111');
-  foo.append('222');
-  t.is(foo.findLast().value, '222', '~> return `222` when findLast value is 111');
+  foo.append("111");
+  t.is(
+    foo.findLast().value,
+    "111",
+    "~> return `111` when findLast value is 111"
+  );
+  foo.append("222");
+  t.is(
+    foo.findLast().value,
+    "222",
+    "~> return `222` when findLast value is 111"
+  );
   let bar = new LinkedList();
-  t.is(bar.findLast(), null, '~> returns `null` when list is empty');
-})
+  t.is(bar.findLast(), null, "~> returns `null` when list is empty");
+});
 
 test("map", t => {
   let foo = new LinkedList();
@@ -146,15 +154,15 @@ test("mergeLinkedList", t => {
   );
 
   const mergeList2 = LinkedList.mergeLinkedList(bar, foo);
-  const arr2 = listToArr(mergeList2)
+  const arr2 = listToArr(mergeList2);
   t.deepEqual(
     arr2,
     fooArr.concat(barArr).sort(),
     "~> returns `true` when merge list2 all value > list1"
-  )
+  );
 
   const eqq = new LinkedList();
-  const eqqArr = [0,2, 4,6,8];
+  const eqqArr = [0, 2, 4, 6, 8];
   eqqArr.forEach(item => eqq.append(item));
   const mergeList3 = LinkedList.mergeLinkedList(eqq, bar);
   const arr3 = listToArr(mergeList3);
