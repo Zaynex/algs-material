@@ -1,26 +1,42 @@
 /**
  * @param {string} s
  * @return {number}
+ * 
  */
 var lengthOfLongestSubstring = function(s) {
-  let l = s.length;
-  if(l < 2 ) return l;
-  let maxLength = 0;
-  let maxWord = [];
-  for(let i = 0; i < l; i++) {
-    let index = maxWord.indexOf(s[i]);
-    if(index != -1) {
-      if(maxWord.length > maxLength) {
-        maxLength = maxWord.length;
-      }
-      maxWord = maxWord.slice(index + 1, maxWord.length);
-      maxWord.push(s[i]);
+  if(s.length <= 1) return s.length
+  let arr = []
+  let maxLength = 0
+  for(let i = 0; i < s.length; i++) {
+    const index = arr.findIndex(item => item === s[i]);
+    if(index < 0) {
+      arr.push(s[i])
     } else {
-      maxWord.push(s[i]);
+      arr.splice(0, index + 1)
+      arr.push(s[i])
     }
+    maxLength = Math.max(arr.length, maxLength);
   }
-  return Math.max(maxLength, maxWord.length);
+
+  return maxLength
 };
 
+var lengthOfLongestSubstring2 = function(s) {
+  let map = new Map();
+  let maxLength = 0;
+  for(let i = 0, j = 0; i < s.length; j++) {
+    // 使用 i 来标记无重复子串开始下标
+    let result = map.has(s[j]);
+    if(result) {
+      i = Math.max(map.get(s[j]) + 1, i);
+    }
+    maxLength = Math.max(maxLength, j - i + 1);
+    map.set(s[j], j)
+  }
+  return maxLength
+}
 
 console.log(lengthOfLongestSubstring("aulowkslssdsd"));
+console.log(lengthOfLongestSubstring("pwwkew"));
+console.log(lengthOfLongestSubstring("au"))
+console.log(lengthOfLongestSubstring("dvdf"));

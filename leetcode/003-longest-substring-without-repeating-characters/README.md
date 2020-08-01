@@ -77,3 +77,8 @@ var lengthOfLongestSubstring = function(s) {
   return Math.max(maxLength, maxWord.length);
 };
 ```
+
+## todo
+时间复杂度 o(N^2)
+
+maxWord 可以尝试用 Map 来代替。
