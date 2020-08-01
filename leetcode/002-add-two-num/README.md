@@ -99,23 +99,18 @@ for (let i = 0; i < sum.length; i++) {
 
 ```
 var addTwoNumbers = function(l1, l2) {
-  let carry = 0;  // 是否有进位
-  let head = new ListNode(0); // 新建一个默认表头，值是什么无所谓，最后返回后继节点
-  let tail = head; // tail 表示领带，是用来链表的前驱替换
+  let link = new ListNode(0)
+  let temp = link;
+  let carry = 0;
   while(l1 || l2) {
-    let val1 = l1 ? l1.val : 0;
-    let val2 = l2 ? l2.val : 0;
-    let sum = val1 + val2 + carry;
-    let node = new ListNode(sum % 10);
-    carry = sum >= 10 ? 1 : 0;
-    // 我们先将 节点赋值给表头的 next
-    tail.next = node;
-    // 然后又让表头指向的是 下一个节点
-    tail = tail.next;
-    if(l1) l1 = l1.next;
-    if(l2) l2 = l2.next;
+    let value = (l1 && l1.val) + (l2 && l2.val) + temp.val;
+    temp.val = (value) % 10
+    carry = value >= 10 ? 1 : 0;
+    temp.next = new ListNode(carry)
+    temp = temp.next;
+    l1 = l1.next;
+    l2 = l2.next;
   }
-  if(carry) tail.next = new ListNode(carry);
-  return head.next;
+  return link
 }
 ```
